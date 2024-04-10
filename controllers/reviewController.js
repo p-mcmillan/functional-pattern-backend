@@ -34,6 +34,8 @@ const addReview = (req, res) => {
     review: req.body.review,
   }
 
+  console.log(reviewData, 'Prepare the review object to insert into the database')
+
   // INSERT NEW REVIEW INTO DATABASEll
   knex('reviews')
     .insert(reviewData)

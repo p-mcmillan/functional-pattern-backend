@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config()
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -11,8 +11,12 @@ module.exports = {
     database: process.env.DB_DATABASE,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
+    // ssl: {
+    //   // Set SSL options as needed
+    //   rejectUnauthorized: false, // Change this to true in production
+    // },
   },
   catch(error) {
-    console.error("Error initializing Knex:", error);
+    console.error('Error initializing Knex:', error)
   },
-};
+}

@@ -1,0 +1,7 @@
+{
+    email hello@pierremcmillan.xyz
+}
+
+api.nycbiomechanics.com:443 {
+    reverse_proxy backend:9929
+}
