@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -17,6 +17,6 @@ module.exports = {
     // },
   },
   catch(error) {
-    console.error('Error initializing Knex:', error)
+    console.error('Error initializing Knex:', error);
   },
-}
+};
