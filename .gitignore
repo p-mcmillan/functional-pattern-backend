@@ -27,3 +27,4 @@ dist-ssr
 "pexels-tima-miroshnichenko-6390164 (Original).mp4"
 assets/
 public/
+.env

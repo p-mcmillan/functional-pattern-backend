@@ -136,7 +136,7 @@ function sendSignUp(signUpData, callback) {
   const mailOptions = {
     from: signUpData.contact_email,
     to: 'info@nycbiomechanics.com',
-    subject: `1 ON 1 TRAINING NEW CLIENT QUESTIONNAIRE`,
+    subject: `NEW CLIENT QUESTIONNAIRE`,
     text: `
     • Name: ${signUpData.first_name} ${signUpData.last_name} \n
     • Phone Number: ${signUpData.phoneNumber} \n
@@ -159,6 +159,7 @@ function sendSignUp(signUpData, callback) {
     • Plant Eater 🌱: ${signUpData.isVegan}\n
     • Willingness to Change Diet Rating: ${signUpData.dietRating}/5 Stars\n
     • Drugs ${signUpData.drugUsage} \n
+    • Alcohol ${signUpData.alcoholUsage} \n
     • Fitness Professional: ${signUpData.fitnessPro}\n
     • Other Training: ${signUpData.otherTraining.join(', ')}
   `,
