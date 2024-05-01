@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 9929;
 
 const {
   handleFormSubmission,
+  handleSignUpSubmission,
   // handleReviewSubmission,
 } = require('./Services/nodemailer');
 const reviewRoutes = require('./routes/review-routes');
@@ -53,7 +54,10 @@ app.use('/reviews', cors(corsOptions), reviewRoutes);
 
 //Node Mailer//
 app.post('/form', handleFormSubmission);
+
+///FIX THIS//
 // app.post('/reviews', handleReviewSubmission);
+app.post('/sign-up', cors(corsOptions), handleSignUpSubmission);
 
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);

@@ -7,8 +7,10 @@ const PASSWORD = process.env.MAILER_PASSWORD;
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: USER,
-    pass: PASSWORD,
+    // user: USER,
+    // pass: PASSWORD,
+    user: '1',
+    pass: '2',
   },
 });
 
@@ -129,4 +131,75 @@ function handleReviewSubmission(req, res) {
   });
 }
 
-module.exports = { sendMail, handleFormSubmission, handleReviewSubmission };
+//1 ON 1 TRAINING NEW CLIENT QUESTIONNAIRE
+function sendSignUp(signUpData, callback) {
+  const mailOptions = {
+    from: signUpData.contact_email,
+    to: 'info@nycbiomechanics.com',
+    subject: `1 ON 1 TRAINING NEW CLIENT QUESTIONNAIRE`,
+    text: `
+    • Name: ${signUpData.first_name} ${signUpData.last_name} \n
+    • Phone Number: ${signUpData.phoneNumber} \n
+    • Email: ${signUpData.contact_email} \n
+    • Age: ${signUpData.age} \n
+    • Gender: ${signUpData.gender}\n
+    • Occupation: ${signUpData.occupation}\n
+    • Chronic Pain: ${signUpData.chronicPain}\n
+    • Injury: ${signUpData.injury}\n
+    • Scoliosis: ${signUpData.scoliosis}\n
+    • Activities: ${signUpData.activities}\n
+    • Willingness to Stop Activities Rating: ${
+      signUpData.activitiesRating
+    }/5 Stars\n
+    • Completed FP Program: ${signUpData.FPprogram}\n
+    • How They Found Us: ${signUpData.foundUs}\n
+    • FP Goals: ${signUpData.goals}\n
+    • Training Times: ${signUpData.tainingTimes}\n
+    • Grains Eater: ${signUpData.isGrains}\n
+    • Plant Eater 🌱: ${signUpData.isVegan}\n
+    • Willingness to Change Diet Rating: ${signUpData.dietRating}/5 Stars\n
+    • Drugs ${signUpData.drugUsage} \n
+    • Fitness Professional: ${signUpData.fitnessPro}\n
+    • Other Training: ${signUpData.otherTraining.join(', ')}
+  `,
+  };
+  console.log(mailOptions, 'mailoptions');
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      callback('error');
+    } else {
+      console.log('Email sent:', info.response);
+      callback('success');
+    }
+  });
+}
+
+function handleSignUpSubmission(req, res) {
+  console.log('Received POST request to /sign-up');
+  const signUpData = req.body;
+  console.log('Sign Data:', signUpData); // Logging reviewData
+
+  res.json({ message: 'Data received successfully' });
+
+  // Send Mail From 1 ON 1 TRAINING NEW CLIENT QUESTIONNAIRE //
+  sendSignUp(signUpData, (error, response, info) => {
+    if (error) {
+      console.log(error);
+      res.send('error');
+    } else {
+      console.log('Email sent:', info.response);
+      res.send('success');
+    }
+
+    res.send(response); // Send response to the client
+  });
+}
+
+module.exports = {
+  sendMail,
+  handleFormSubmission,
+  handleReviewSubmission,
+  handleSignUpSubmission,
+};
