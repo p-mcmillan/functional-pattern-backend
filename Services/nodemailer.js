@@ -157,11 +157,15 @@ function sendSignUp(signUpData, callback) {
     • Training Times: ${signUpData.tainingTimes}\n
     • Grains Eater: ${signUpData.isGrains}\n
     • Plant Eater 🌱: ${signUpData.isVegan}\n
-    • Willingness to Change Diet Rating: ${signUpData.dietRating}/5 Stars\n
+    • Willingness to stop Eating Grains Rating: ${
+      signUpData.grainRating
+    }/5 Stars\n
     • Drugs ${signUpData.drugUsage} \n
     • Alcohol ${signUpData.alcoholUsage} \n
     • Fitness Professional: ${signUpData.fitnessPro}\n
-    • Other Training: ${signUpData.otherTraining.join(', ')}
+    • Other Training: ${signUpData.otherTraining.join(', ')}\n
+    • Nature${signUpData.nature}\n
+    • Sunlight ${signUpData.sun}
   `,
   };
   console.log(mailOptions, 'mailoptions');
