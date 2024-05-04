@@ -57,7 +57,7 @@ app.post('/form', handleFormSubmission);
 
 ///FIX THIS//
 // app.post('/reviews', handleReviewSubmission);
-app.post('/sign-up', cors(corsOptions), handleSignUpSubmission);
+app.post('/questionnaire', handleSignUpSubmission);
 
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);

@@ -7,10 +7,8 @@ const PASSWORD = process.env.MAILER_PASSWORD;
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    // user: USER,
-    // pass: PASSWORD,
-    user: '1',
-    pass: '2',
+    user: USER,
+    pass: PASSWORD,
   },
 });
 
