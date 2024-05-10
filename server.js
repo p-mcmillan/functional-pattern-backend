@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const helmet = require('helmet');
 const app = express();
@@ -10,9 +8,9 @@ const PORT = process.env.PORT || 9929;
 const {
   handleFormSubmission,
   handleSignUpSubmission,
-  // handleReviewSubmission,
+  handleReviewSubmission,
 } = require('./Services/nodemailer');
-const reviewRoutes = require('./routes/review-routes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 const corsOptions = {
   origin: 'https://www.nycbiomechanics.com',
@@ -49,8 +47,7 @@ app.use(helmet());
 app.use(cors(corsOptions));
 
 //DB//
-app.use('/reviews', cors(corsOptions), reviewRoutes);
-//app.use('/reviews', reviewRoutes, (req, res) => {})
+app.use('/reviews', cors(corsOptions), handleReviewSubmission, reviewRoutes);
 
 //Node Mailer//
 app.post('/form', handleFormSubmission);

@@ -93,7 +93,7 @@ function sendReview(reviewData, callback) {
     from: reviewData.contact_email,
     to: 'info@nycbiomechanics.com',
     subject: `A Customer has just submitted review on NYC Biomechanics website`,
-    text: `• Name: ${reviewData.contact_name} \n • Email: ${reviewData.contact_email} \n • Rating: ${reviewData.rating}/5 Stars \n • Message: ${reviewData.review} \n • Review ID: ${reviewData.id} "`,
+    text: `• Name: ${reviewData.contact_name} \n • Email: ${reviewData.contact_email} \n • Rating: ${reviewData.rating}/5 Stars \n • Message: ${reviewData.review} \n"`,
   };
   console.log(mailOptions, 'mailoptions');
 
@@ -108,24 +108,43 @@ function sendReview(reviewData, callback) {
   });
 }
 
-function handleReviewSubmission(req, res) {
-  //console.log('Received POST request to /api/reviews')
-  const reviewData = req.body;
-  //console.log('Review Data:', reviewData) // Logging reviewData
+// function handleReviewSubmission(req, res) {
+//   //console.log('Received POST request to /api/reviews')
+//   const reviewData = req.body;
+//   console.log('Review Data:', reviewData); // Logging reviewData
 
-  res.json({ message: 'Data received successfully' });
+//   res.json({ message: 'Data received successfully' });
+
+//   // Send Mail From Review Form
+//   sendReview(reviewData, (error, response, info) => {
+//     if (error) {
+//       console.log(error);
+//       res.send('error');
+//     } else {
+//       console.log('Email sent:', info.response);
+//       res.send('success');
+//     }
+
+//     res.send(response);
+//   });
+// }
+
+function handleReviewSubmission(req, res, next) {
+  const reviewData = req.body;
+  console.log('Review Data:', reviewData); // Logging reviewData
+
+  next();
 
   // Send Mail From Review Form
   sendReview(reviewData, (error, response, info) => {
     if (error) {
       console.log(error);
-      res.send('error');
-    } else {
-      console.log('Email sent:', info.response);
-      res.send('success');
+      res.status(500).send('Error sending email');
+      return; // Return to prevent further execution
     }
 
-    res.send(response); // Send response to the client
+    console.log('Email sent:', info.response);
+    res.status(200).json({ message: 'Data received successfully', response });
   });
 }
 
