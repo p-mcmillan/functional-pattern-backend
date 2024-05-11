@@ -51,9 +51,6 @@ app.use('/reviews', cors(corsOptions), handleReviewSubmission, reviewRoutes);
 
 //Node Mailer//
 app.post('/form', handleFormSubmission);
-
-///FIX THIS//
-// app.post('/reviews', handleReviewSubmission);
 app.post('/questionnaire', handleSignUpSubmission);
 
 app.listen(PORT, () => {
