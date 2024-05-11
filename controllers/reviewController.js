@@ -125,7 +125,7 @@ const addReview = (req, res, next) => {
       console.log('Review data inserted successfully:', reviewData);
       res.status(201).send({ id, ...req.body });
 
-      // Now that reviewData is defined, call handleReviewSubmission
+      // call handleReviewSubmission
       handleReviewSubmission(reviewData);
     })
     .catch((err) => {
