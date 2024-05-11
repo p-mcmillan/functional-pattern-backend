@@ -1,4 +1,4 @@
-// reviewControler.js
+
 
 const knex = require('knex')(require('../knexfile'));
 const { handleReviewSubmission } = require('../Services/nodemailer');
